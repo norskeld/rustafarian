@@ -1,0 +1,28 @@
+actions {
+  suite "prompts" {
+    input "name" {
+      hint "Repository name"
+    }
+
+    input "description" {
+      hint "Repository description"
+    }
+
+    input "author" {
+      hint "Repository author"
+    }
+
+    input "email" {
+      hint "Repository author's email"
+    }
+  }
+
+  suite "replacements" {
+    replace {
+      "name"
+      "description"
+      "author"
+      "email"
+    }
+  }
+}
