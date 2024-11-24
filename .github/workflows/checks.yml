@@ -10,7 +10,7 @@ on:
 
 jobs:
   extract-toolchain:
-    name: extract toolchain
+    name: Extract toolchain
     runs-on: ubuntu-latest
     outputs:
       toolchain: ${{ steps.toolchain.outputs.value }}
@@ -24,7 +24,7 @@ jobs:
       - run: echo "toolchain=${{ steps.toolchain.outputs.value || 'stable' }}" >> $GITHUB_OUTPUT
 
   clippy:
-    name: cargo clippy
+    name: Clippy
     runs-on: ubuntu-latest
     needs: extract-toolchain
     env:
@@ -38,8 +38,20 @@ jobs:
       - uses: swatinem/rust-cache@v2
       - run: cargo clippy -- -D warnings
 
+  fmt:
+    name: Formatting
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: nightly
+          components: rustfmt
+      - uses: swatinem/rust-cache@v2
+      - run: cargo +nightly fmt --all -- --check
+
   test:
-    name: cargo test
+    name: Test
     needs: extract-toolchain
     runs-on: ubuntu-latest
     env:
@@ -51,15 +63,3 @@ jobs:
           toolchain: ${{ env.TOOLCHAIN }}
       - uses: swatinem/rust-cache@v2
       - run: cargo test
-
-  fmt:
-    name: cargo fmt
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@master
-        with:
-          toolchain: nightly
-          components: rustfmt
-      - uses: swatinem/rust-cache@v2
-      - run: cargo fmt --all -- --check
