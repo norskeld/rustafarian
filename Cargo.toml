@@ -1,7 +1,8 @@
 [package]
-name = "rustafarian"
+name = "{project:name}"
 version = "0.1.0"
-authors = ["Vladislav Mamon <vlad@nrsk.dev>"]
+description = "{project:description}"
+authors = ["{author:name} <{author:email}>"]
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html

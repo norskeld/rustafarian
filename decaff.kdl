@@ -1,0 +1,51 @@
+actions {
+  suite "prompts" {
+    input "project:name" {
+      hint "Project name"
+    }
+
+    input "project:description" {
+      hint "Project short description"
+    }
+
+    editor "project:readme" {
+      hint "README.md description"
+    }
+
+    input "repo:owner" {
+      hint "Repository owner"
+    }
+
+    input "repo:name" {
+      hint "Repository name"
+    }
+
+    input "author:name" {
+      hint "Author name"
+      default "John Doe"
+    }
+
+    input "author:email" {
+      hint "Author email"
+      default "john@doe.com"
+    }
+
+    number "license:year" {
+      hint "License year"
+      default 2025
+    }
+  }
+
+  suite "replacements" {
+    replace {
+      "project:name"
+      "project:description"
+      "project:readme"
+      "repo:owner"
+      "repo:name"
+      "author:name"
+      "author:email"
+      "license:year"
+    }
+  }
+}
